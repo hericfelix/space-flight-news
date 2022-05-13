@@ -7,6 +7,7 @@ module.exports = {
     },
   },
   testEnvironment: 'node',
+  testMatch: ['**/**/*.spec.ts'],
   transform: {
     '^.+\\.[tj]s$': 'ts-jest',
   },
