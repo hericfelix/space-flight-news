@@ -8,7 +8,7 @@ import {
 import { Article } from '../../entities/Article';
 
 interface ArticleRepo {
-  createArticle: (article: ArticleInterface) => Promise<ArticleInterface>;
+  createArticle: (article: ArticleInterface) => Promise<Article>;
   getArticleById: (id: string) => Promise<Article>;
   getArticles: () => Promise<Article[]>;
   updateArticle: (

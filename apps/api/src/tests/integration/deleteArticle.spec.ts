@@ -16,7 +16,7 @@ describe('delete article route integration test', () => {
   });
 
   it('should delete user and return status 204', async () => {
-    await ArticleRepository.save(validArticle);
+    await new ArticleRepository().createArticle(validArticle);
 
     const response = await request(app).delete('/articles/1');
 

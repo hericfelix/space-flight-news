@@ -16,7 +16,7 @@ describe('get article by id route integration test', () => {
   });
 
   it('should get user and return status 200', async () => {
-    await ArticleRepository.save(validArticle);
+    await new ArticleRepository().createArticle(validArticle);
 
     const response = await request(app).get('/articles/1');
 
