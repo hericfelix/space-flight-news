@@ -1,13 +1,8 @@
 export default {
   type: 'mongodb',
+  url: `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.${process.env.DB_CLUSTER}.mongodb.net/?retryWrites=true&w=majority`,
+  useNewUrlParser: true,
   synchronize: true,
-  logging: false,
-  entities: ['src/entities/**/*.ts'],
-  migrations: ['src/migrations/**/*.ts'],
-  subscribers: ['src/subscriber/**/*.ts'],
-  cli: {
-    entitiesDir: 'src/entities',
-    migrationsDir: 'src/migrations',
-    subscribersDir: 'src/subscriber',
-  },
+  logging: true,
+  entities: ['src/entity/*.*'],
 };
