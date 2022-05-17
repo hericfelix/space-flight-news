@@ -18,17 +18,13 @@ describe('create article route integration test', () => {
     const response = await request(app).post('/articles').send(validArticle);
 
     expect(response.status).toBe(201);
-    expect(response.body).toBe({
-      message: 'article created',
-    });
+    expect(Object.values(response.body)[0]).toBe('article created');
   });
 
   it("should'nt be able to create user and return status 400", async () => {
     const response = await request(app).post('./articles').send(invalidArticle);
 
     expect(response.status).toBe(400);
-    expect(response.body).toBe({
-      message: 'url is a required field',
-    });
+    expect(Object.values(response.body)[0]).toBe('url is a required field');
   });
 });
