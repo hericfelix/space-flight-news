@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { ArticleRepository } from '../repositories';
 import { ErrorHandler } from '../utils';
 
-const getArticleByIdController = async (req: Request, res: Response) => {
+const updateArticleController = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { validated } = req;
 
@@ -12,7 +12,7 @@ const getArticleByIdController = async (req: Request, res: Response) => {
     throw new ErrorHandler(404, 'article not found');
   }
 
-  return res.status(200).json(article);
+  return res.status(200);
 };
 
-export default getArticleByIdController;
+export default updateArticleController;

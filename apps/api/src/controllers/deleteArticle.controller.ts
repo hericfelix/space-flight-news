@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { ArticleRepository } from '../repositories';
 import { ErrorHandler } from '../utils';
 
-const getArticleByIdController = async (req: Request, res: Response) => {
+const deleteArticleController = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const article = await new ArticleRepository().deleteArticle(id);
@@ -14,4 +14,4 @@ const getArticleByIdController = async (req: Request, res: Response) => {
   return res.status(204);
 };
 
-export default getArticleByIdController;
+export default deleteArticleController;

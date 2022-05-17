@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { ArticleRepository } from '../repositories';
 
-const getArticleByIdController = async (req: Request, res: Response) => {
+const createArticleController = async (req: Request, res: Response) => {
   const { validated } = req;
 
   const article = await new ArticleRepository().createArticle(validated);
@@ -9,4 +9,4 @@ const getArticleByIdController = async (req: Request, res: Response) => {
   return res.status(201).json({ message: 'article created' });
 };
 
-export default getArticleByIdController;
+export default createArticleController;
