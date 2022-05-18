@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import app from './app';
 import dbConfig from '../ormconfig';
+import Article from './entities/Article';
 
 createConnection({
   type: 'mongodb',
@@ -9,7 +10,7 @@ createConnection({
   useNewUrlParser: true,
   synchronize: true,
   logging: true,
-  entities: ['src/entity/*.*'],
+  entities: [Article],
 })
   .then(() => {
     const PORT = process.env.PORT ?? 3000;

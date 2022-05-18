@@ -4,5 +4,5 @@ export default {
   useNewUrlParser: true,
   synchronize: true,
   logging: true,
-  entities: ['src/entity/*.*'],
+  entities: ['src/entities/*.*'],
 };

@@ -5,7 +5,7 @@ import {
   MongoRepository,
   UpdateResult,
 } from 'typeorm';
-import { Article } from '../../entities/Article';
+import Article from '../../entities/Article';
 
 interface ArticleRepo {
   createArticle: (article: ArticleInterface) => Promise<Article>;

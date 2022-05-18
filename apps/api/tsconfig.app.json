@@ -4,8 +4,13 @@
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
     "types": ["node", "express"],
-    "composite": true
+    "composite": true,
+    "esModuleInterop": true
   },
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
-  "include": ["**/*.ts"]
+  "include": [
+    "**/*.ts",
+    "../../libs/types/src/index.ts",
+    "../../libs/types/src/lib/types.ts"
+  ]
 }

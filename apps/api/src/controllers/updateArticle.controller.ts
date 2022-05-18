@@ -1,18 +1,25 @@
 import { Request, Response } from 'express';
 import { ArticleRepository } from '../repositories';
-import { ErrorHandler } from '../utils';
+import { ErrorHandler, handleError } from '../utils';
 
 const updateArticleController = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { validated } = req;
+  try {
+    const { id } = req.params;
+    const { validated } = req;
 
-  const article = await new ArticleRepository().updateArticle(id, validated);
+    const updateResult = await new ArticleRepository().updateArticle(
+      id,
+      validated
+    );
 
-  if (!article) {
-    throw new ErrorHandler(404, 'article not found');
+    if (updateResult.affected === 0) {
+      throw new ErrorHandler(404, 'article not found');
+    }
+
+    return res.status(200).json();
+  } catch (error) {
+    return handleError(error, res);
   }
-
-  return res.status(200);
 };
 
 export default updateArticleController;
