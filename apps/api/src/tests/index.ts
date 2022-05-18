@@ -1,5 +1,6 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { createConnection, getConnection } from 'typeorm';
+import Article from '../entities/Article';
 
 export const validArticle = {
   featured: false,
@@ -47,24 +48,20 @@ export const invalidArticle = {
 export class ConnectionTestJest {
   mongoServer: MongoMemoryServer;
 
-  constructor() {
-    this.mongoServer = new MongoMemoryServer();
-  }
-
   connect = async () => {
+    this.mongoServer = await MongoMemoryServer.create();
     const mongoUri = this.mongoServer.getUri();
 
     await createConnection({
       type: 'mongodb',
       url: mongoUri,
       database: 'test',
+      entities: [Article],
     });
   };
 
   close = async () => {
-    this.mongoServer.stop();
     await getConnection().close();
+    await this.mongoServer.stop();
   };
 }
-
-console.log('hey');

@@ -7,11 +7,11 @@ describe('create article route integration test', () => {
 
   beforeEach(async () => {
     conn = new ConnectionTestJest();
-    conn.connect();
+    await conn.connect();
   });
 
   afterEach(async () => {
-    conn.close();
+    await conn.close();
   });
 
   it('should create user and return status 201', async () => {
@@ -22,9 +22,11 @@ describe('create article route integration test', () => {
   });
 
   it("should'nt be able to create user and return status 400", async () => {
-    const response = await request(app).post('./articles').send(invalidArticle);
+    const response = await request(app).post('/articles').send(invalidArticle);
 
     expect(response.status).toBe(400);
-    expect(Object.values(response.body)[0]).toBe('url is a required field');
+    expect(Object.values(response.body)[0]).toStrictEqual([
+      'url is a required field',
+    ]);
   });
 });

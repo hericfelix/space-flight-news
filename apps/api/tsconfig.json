@@ -2,6 +2,9 @@
   "extends": "../../tsconfig.base.json",
   "files": ["src/@types/custom.d.ts"],
   "include": [],
+  "compilerOptions": {
+    "esModuleInterop": true
+  },
   "references": [
     {
       "path": "./tsconfig.app.json"
