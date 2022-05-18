@@ -9,8 +9,11 @@ export class ErrorHandler extends Error {
   }
 }
 export const handleError = (err, res) => {
-  const { statusCode, message } = err;
-  res.status(statusCode).json({
-    error: message,
-  });
+  if (err instanceof ErrorHandler) {
+    const { statusCode, message } = err;
+
+    return res.status(statusCode).json({ error: message });
+  }
+
+  return res.status(400).json(err);
 };

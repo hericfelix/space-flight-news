@@ -1,12 +1,12 @@
 import { AnySchema } from 'yup';
 import { NextFunction, Request, Response } from 'express';
-import { ErrorHandler } from '../utils';
 
 const validateSchema =
   (schema: AnySchema) =>
-  async (req: Request, _: Response, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
       const validated = await schema.validate(req.body, {
+        abortEarly: false,
         stripUnknown: true,
       });
 
@@ -14,7 +14,7 @@ const validateSchema =
 
       return next();
     } catch (error) {
-      throw new ErrorHandler(400, error);
+      return res.status(400).json({ error: error.errors });
     }
   };
 

@@ -2,7 +2,7 @@ import { EventsInterface, LaunchesInterface } from '@space-flight/types';
 import { Entity, Column, ObjectIdColumn, ObjectID } from 'typeorm';
 
 @Entity()
-export class Article {
+class Article {
   @ObjectIdColumn()
   id: ObjectID;
 
@@ -33,3 +33,5 @@ export class Article {
   @Column()
   events: EventsInterface[];
 }
+
+export default Article;
