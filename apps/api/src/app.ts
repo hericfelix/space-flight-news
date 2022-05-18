@@ -6,7 +6,7 @@ const app = express();
 
 app.use(json());
 
-app.use('/api', articleRouter);
+app.use('', articleRouter);
 
 //eslint-disable-next-line
 app.use((err: any, _: Request, res: Response, __: NextFunction) => {

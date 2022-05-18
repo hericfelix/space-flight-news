@@ -1,12 +1,12 @@
 import { NextFunction, Response, Request } from 'express';
-import { validate } from '../../middlewares';
+import { validateSchema } from '../../middlewares';
 import { validArticle, invalidArticle } from '../';
-import { articleSchema } from '../../schemas';
+import { createArticleSchema } from '../../schemas';
 
 describe('Tests for validation schema middleware', () => {
   const mockRes: Partial<Response> = {};
   const mockReq: Partial<Request> = {};
-  const mockNext: Partial<NextFunction> = jest.fn();
+  const mockNext: NextFunction = jest.fn();
 
   beforeEach(() => {
     mockRes.json = jest.fn().mockReturnValue(mockRes);
@@ -16,19 +16,27 @@ describe('Tests for validation schema middleware', () => {
   it('should be an invalid object', async () => {
     mockReq.body = invalidArticle;
 
-    await validate(articleSchema)(mockReq, mockRes, mockNext);
+    await validateSchema(createArticleSchema)(
+      mockReq as Request,
+      mockRes as Response,
+      mockNext as NextFunction
+    );
 
     expect(mockRes.status).toHaveBeenCalledWith(400);
     expect(mockRes.json).toHaveBeenCalledWith({
-      message: 'url is a required field',
+      error: ['url is a required field'],
     });
     expect(mockNext).toHaveBeenCalledTimes(0);
   });
   it('should be a valid object', async () => {
     mockReq.body = validArticle;
 
-    await validate(articleSchema)(mockReq, mockRes, mockNext);
+    await validateSchema(createArticleSchema)(
+      mockReq as Request,
+      mockRes as Response,
+      mockNext as NextFunction
+    );
 
-    expect(mockNext).toHaveBeenCalledTimes(1);
+    expect(mockNext).toBeCalledTimes(1);
   });
 });
